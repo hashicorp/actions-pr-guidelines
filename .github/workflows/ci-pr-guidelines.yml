@@ -1,0 +1,33 @@
+name: ci-pr-guidelines
+
+on:
+  workflow_call:
+    secrets:
+      REPO_GITHUB_TOKEN:
+        required: true
+  pull_request:
+    types:
+      - opened
+    branches-ignore:
+      - 'dependabot/**'
+permissions: 
+  pull-requests: write
+  contents: read
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        if: github.repository != 'hashicorp/releng-support'
+        with:
+          repository: hashicorp/releng-support
+          token: ${{ secrets.REPO_GITHUB_TOKEN }}
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        if: github.repository == 'hashicorp/releng-support'
+      - name: 'Comment about PR review guidelines'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr comment "$PR" --body-file .github/pr-guidelines-comment-body.md
