@@ -1,0 +1,26 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+---
+name: "PR Guidelines Workflow"
+author: "HashiCorp"
+description: "Run PR Guidelines Workflow"
+
+branding:
+  color: "gray-dark"
+  icon: "package"
+
+inputs:
+  github-token:
+    description: "GitHub token access to actions-pr-guidelines."
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Kick off PR Guidelines Workflow
+      id: ci-pr-guidelines
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: .github/workflows/ci-pr-guideliens.yml
