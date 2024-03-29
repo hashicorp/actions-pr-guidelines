@@ -7,8 +7,8 @@ author: "HashiCorp"
 description: "Run PR Guidelines Workflow"
 
 branding:
-  color: "gray-dark"
-  icon: "package"
+  color: red
+  icon: heart
 
 inputs:
   github-token:
