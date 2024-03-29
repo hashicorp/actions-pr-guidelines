@@ -19,8 +19,8 @@ runs:
   using: composite
   steps:
     - name: Kick off PR Guidelines Workflow
-      id: ci-pr-guidelines
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.github-token }}
-      run: .github/workflows/ci-pr-guideliens.yml
+      run: |
+         # TODO run the thing
