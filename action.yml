@@ -24,4 +24,4 @@ runs:
         GITHUB_TOKEN: ${{ secrets.github-token }}
         PR: ${{ github.event.pull_request.html_url }}
       run: |
-        gh pr comment "$PR" --body-file .github/comment-body.md
+        gh pr comment "$PR" --body-file "$GITHUB_ACTION_PATH/comment-body.md"
