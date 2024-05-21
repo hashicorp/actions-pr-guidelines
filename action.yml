@@ -22,6 +22,6 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
-        PR: ${{ github.event.pull_request.html_url }}
+        PR: ${{ github.event.number}}
       run: |
-        gh pr comment "$PR" --body-file comment-body.md
+        gh pr comment "$PR" --body-file "$GITHUB_ACTION_PATH/comment-body.md"
