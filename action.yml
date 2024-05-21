@@ -1,0 +1,27 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+---
+name: "PR Guidelines Workflow"
+author: "HashiCorp"
+description: "Run PR Guidelines Workflow"
+
+branding:
+  color: red
+  icon: heart
+
+inputs:
+  github-token:
+    description: "GitHub token access to actions-pr-guidelines."
+    required: true
+
+runs:
+  using: composite
+  steps: 
+    - name: 'Comment about PR review guidelines'
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        PR: ${{ github.event.number}}
+      run: |
+        gh pr comment "$PR" --body-file "$GITHUB_ACTION_PATH/comment-body.md"
