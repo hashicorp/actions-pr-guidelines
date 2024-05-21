@@ -29,4 +29,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment "${{ github.event.pull_request.html_url }}" --body-file $GITHUB_ACTION_PATH/pr-guidelines-comment-body.md
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body-file "$GITHUB_ACTION_PATH"/pr-guidelines-comment-body.md
