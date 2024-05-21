@@ -17,10 +17,11 @@ inputs:
 
 runs:
   using: composite
-  steps:
-    - name: Kick off PR Guidelines Workflow
+  steps: 
+    - name: 'Comment about PR review guidelines'
       shell: bash
       env:
-        GH_TOKEN: ${{ inputs.github-token }}
+        GITHUB_TOKEN: ${{ secrets.github-token }}
+        PR: ${{ github.event.pull_request.html_url }}
       run: |
-         # TODO run the thing
+        gh pr comment "$PR" --body-file .github/comment-body.md

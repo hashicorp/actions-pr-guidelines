@@ -28,6 +28,5 @@ jobs:
       - name: 'Comment about PR review guidelines'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR: ${{ github.event.pull_request.html_url }}
         run: |
-          gh pr comment "$PR" --body-file .github/pr-guidelines-comment-body.md
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body-file $GITHUB_ACTION_PATH/pr-guidelines-comment-body.md
